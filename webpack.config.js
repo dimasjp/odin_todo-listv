@@ -8,6 +8,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'To-Do',
+            template: './src/template.html',
         }),
     ],
     output: {

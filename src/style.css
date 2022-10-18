@@ -1,0 +1,29 @@
+:root {
+    --slate-gray: #64748B;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #94A3B8;
+}
+
+#content {
+    height: 70vh;
+    width: 60vw;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border: 1px solid red;
+}
+
+.header {
+    border: 1px solid blue;
+}
+
+.main {
+    border: 1px solid blue;
+}
