@@ -10,6 +10,4 @@ const createTask = (name, date, priority, projectid) => {
     tasksList.push(newTask);
 }
 
-createTask("Task-1", 22);
-
 export { tasksList }
