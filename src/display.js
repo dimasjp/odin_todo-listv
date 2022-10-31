@@ -1,19 +1,20 @@
 import { projectsArray } from "./projects";
 
 
-const createProjectCard = (project) => {
-    const projectCard = document.createElement('div');
-    projectCard.classList.add('project-card');
+const renderProjectNav = () => {
+    const projectContainer = document.querySelector('.project-container');
+    projectContainer.innerHTML = '';
+
+    projectsArray.forEach((project) => {
+        const projectCard = document.createElement('div');
+        projectCard.classList.add('project-card');
+        projectContainer.appendChild(projectCard);
+
+        const projectCardTitle = document.createElement('p');
+        projectCardTitle.classList.add('project-title');
+        projectCardTitle.textContent = project.title;
+        projectCard.appendChild(projectCardTitle);
+    })
 }
 
-const renderProjects = (project) => {
-    const projectContainer = document.querySelector('#project-container');
-    const projectCard = createProjectCard(project);
-    projectContainer.appendChild(projectCard);
-}
-
-const renderPage = () => {
-    renderProjects();
-}
-
-export { createProjectCard, renderProjects, renderPage }
+export { renderProjectNav }
