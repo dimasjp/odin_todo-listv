@@ -1,17 +1,21 @@
-import { createProjectCard, renderProjects } from "./display";
+import { taskFactory } from "./tasks";
+import { projectsArray } from "./TodoList";
 
-let projectsArray = [];
+const projectFactory = (title) => {
+    const projectTasks = [];
+    
+    const addProjectTasks = (task) => {
+        projectTasks.push(task);
+    }
 
-const projectFactory = (id, title, tasks) => {
-    return { id, title, tasks }
+    return { title, projectTasks, addProjectTasks };
 }
 
-const createProject = () => {
-    const newProject = projectFactory(projectid, projectName);
+const createProject = (id, title) => {
+    const newProject = projectFactory(id, title);
     projectsArray.push(newProject);
-    renderProjects(newProject);
 }
 
-export { projectsArray }
+export { createProject, projectFactory }
 
 
