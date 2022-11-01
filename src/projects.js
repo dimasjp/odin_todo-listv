@@ -1,4 +1,4 @@
-import { renderProjectNav } from "./display";
+import { renderProjects } from "./display";
 import { taskFactory } from "./tasks";
 
 const projectFactory = (title) => {
@@ -22,13 +22,8 @@ const projectsArray = [];
 const createProject = (title) => {
     const newProject = projectFactory(title);
     projectsArray.push(newProject);
-    renderProjectNav();
+    renderProjects();
 }
-
-createProject("Arctic");
-createProject("Offer");
-createProject("Cars");
-
 
 export { createProject, projectFactory, projectsArray, addTaskToProject }
 

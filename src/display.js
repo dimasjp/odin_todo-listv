@@ -1,7 +1,6 @@
 import { projectsArray } from "./projects";
 
-
-const renderProjectNav = () => {
+const renderProjects = () => {
     const projectContainer = document.querySelector('.project-container');
     projectContainer.innerHTML = '';
 
@@ -20,6 +19,7 @@ const renderProjectNav = () => {
 const renderProjectTasks = () => {
     const taskContainer = document.querySelector('.task-container');
     taskContainer.innerHTML = '';
+
 }
 
-export { renderProjectNav }
+export { renderProjects }
