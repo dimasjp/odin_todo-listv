@@ -1,21 +1,35 @@
+import { renderProjectNav } from "./display";
 import { taskFactory } from "./tasks";
-import { projectsArray } from "./TodoList";
 
 const projectFactory = (title) => {
     const projectTasks = [];
     
-    const addProjectTasks = (task) => {
+    function addTask(task) {
         projectTasks.push(task);
     }
 
-    return { title, projectTasks, addProjectTasks };
+    return { title, projectTasks, addTask };
 }
 
-const createProject = (id, title) => {
-    const newProject = projectFactory(id, title);
+const addTaskToProject = (task) => {
+    projectsArray.forEach((project) => {
+        project.addTask(task);
+    })
+}
+
+const projectsArray = [];
+
+const createProject = (title) => {
+    const newProject = projectFactory(title);
     projectsArray.push(newProject);
+    renderProjectNav();
 }
 
-export { createProject, projectFactory }
+createProject("Arctic");
+createProject("Offer");
+createProject("Cars");
+
+
+export { createProject, projectFactory, projectsArray, addTaskToProject }
 
 

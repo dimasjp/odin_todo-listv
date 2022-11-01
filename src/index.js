@@ -1,6 +1,9 @@
-import { renderPage } from './display';
-import { projectsArray } from './projects';
+import { createProject, projectsArray } from './projects';
 import './style.css';
-import { tasksList } from './tasks';
+import { createTask, tasksList } from './tasks';
 
-renderPage();
+console.log(projectsArray);
+
+createTask("Forever", "22", "Prio");
+
+console.log(projectsArray);

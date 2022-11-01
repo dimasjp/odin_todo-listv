@@ -17,4 +17,9 @@ const renderProjectNav = () => {
     })
 }
 
+const renderProjectTasks = () => {
+    const taskContainer = document.querySelector('.task-container');
+    taskContainer.innerHTML = '';
+}
+
 export { renderProjectNav }
