@@ -1,11 +1,15 @@
 import { projectsArray } from "./projects";
 import { openModal } from "./modal";
+import { createForm } from "./form";
 
 const openProjectModal = document.querySelector('.open-project-modal');
+const form = document.querySelector('#modal-form');
 
 openProjectModal.addEventListener('click', () => {
     openModal();
+    form.classList.add('project-form');
     console.log("Open Modal")
+    createForm();
 })
 
 const renderProjects = () => {
