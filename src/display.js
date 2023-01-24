@@ -1,4 +1,12 @@
 import { projectsArray } from "./projects";
+import { openModal } from "./modal";
+
+const openProjectModal = document.querySelector('.open-project-modal');
+
+openProjectModal.addEventListener('click', () => {
+    openModal();
+    console.log("Open Modal")
+})
 
 const renderProjects = () => {
     const projectContainer = document.querySelector('.project-container');

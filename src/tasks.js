@@ -1,4 +1,4 @@
-import { addTaskToProject, projectsArray } from "./projects"
+import { projectsArray } from "./projects"
 
 const taskFactory = (name, date, priority) => {
     return { name , date, priority}
@@ -6,7 +6,7 @@ const taskFactory = (name, date, priority) => {
 
 const createTask = (name, date, priority) => {
     const newTask = taskFactory(name, date, priority);
-    addTaskToProject(newTask);
+    projectsArray[0].projectTasks.push(newTask);
 }
 
 

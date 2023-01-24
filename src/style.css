@@ -27,3 +27,28 @@ body {
 .main {
     border: 1px solid blue;
 }
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 15% auto;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    border: 1px solid red;
+    background-color: white;
+}
+
+.display-none {
+    display: none;
+}

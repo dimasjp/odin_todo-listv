@@ -3,18 +3,8 @@ import { taskFactory } from "./tasks";
 
 const projectFactory = (title) => {
     const projectTasks = [];
-    
-    function addTask(task) {
-        projectTasks.push(task);
-    }
 
-    return { title, projectTasks, addTask };
-}
-
-const addTaskToProject = (task) => {
-    projectsArray.forEach((project) => {
-        project.addTask(task);
-    })
+    return { title, projectTasks };
 }
 
 const projectsArray = [];
@@ -22,9 +12,8 @@ const projectsArray = [];
 const createProject = (title) => {
     const newProject = projectFactory(title);
     projectsArray.push(newProject);
-    renderProjects();
 }
 
-export { createProject, projectFactory, projectsArray, addTaskToProject }
+export { createProject, projectFactory, projectsArray }
 
 
