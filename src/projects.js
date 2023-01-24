@@ -7,7 +7,7 @@ const projectFactory = (title) => {
     return { title, projectTasks };
 }
 
-const projectsArray = [];
+let projectsArray = [];
 
 const createProject = (title) => {
     const newProject = projectFactory(title);
@@ -16,6 +16,11 @@ const createProject = (title) => {
     renderProjects();
 }
 
-export { createProject, projectFactory, projectsArray }
+const removeProject = (index) => {
+    projectsArray.splice(index, 1);
+    renderProjects();
+}
+
+export { createProject, projectFactory, projectsArray, removeProject }
 
 

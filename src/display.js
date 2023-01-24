@@ -1,4 +1,4 @@
-import { projectsArray } from "./projects";
+import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
 import { createForm } from "./form";
 
@@ -16,7 +16,7 @@ const renderProjects = () => {
     const projectContainer = document.querySelector('.project-container');
     projectContainer.innerHTML = '';
 
-    projectsArray.forEach((project) => {
+    projectsArray.forEach((project, index, tasks) => {
         const projectCard = document.createElement('div');
         projectCard.classList.add('project-card');
         projectContainer.appendChild(projectCard);
@@ -25,6 +25,15 @@ const renderProjects = () => {
         projectCardTitle.classList.add('project-title');
         projectCardTitle.textContent = project.title;
         projectCard.appendChild(projectCardTitle);
+
+        const projectRemoveButton = document.createElement('button');
+        projectRemoveButton.classList.add('project-remove-btn');
+        projectRemoveButton.textContent = 'X';
+        projectCard.appendChild(projectRemoveButton);
+
+        projectRemoveButton.addEventListener('click', () => {
+            removeProject(index);
+        })
     })
 }
 
