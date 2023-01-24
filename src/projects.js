@@ -12,6 +12,8 @@ const projectsArray = [];
 const createProject = (title) => {
     const newProject = projectFactory(title);
     projectsArray.push(newProject);
+    console.log(projectsArray)
+    renderProjects();
 }
 
 export { createProject, projectFactory, projectsArray }
