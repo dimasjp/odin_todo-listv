@@ -21,6 +21,10 @@ const renderProjects = () => {
         projectCard.classList.add('project-card');
         projectContainer.appendChild(projectCard);
 
+        projectCard.addEventListener('click', () => {
+            renderProjectTasks(project, index);
+        })
+
         const projectCardTitle = document.createElement('p');
         projectCardTitle.classList.add('project-title');
         projectCardTitle.textContent = project.title;
@@ -37,10 +41,20 @@ const renderProjects = () => {
     })
 }
 
-const renderProjectTasks = () => {
+const renderProjectTasks = (project, index) => {
     const taskContainer = document.querySelector('.task-container');
     taskContainer.innerHTML = '';
 
+    const projectPageHeader = document.createElement('div');
+    taskContainer.appendChild(projectPageHeader);
+
+    const projectPageTitle = document.createElement('div');
+    projectPageTitle.textContent = project.title;
+    projectPageHeader.appendChild(projectPageTitle);
+
+    const addTaskButton = document.createElement('button');
+    addTaskButton.textContent = 'Add Task';
+    projectPageHeader.appendChild(addTaskButton);
 }
 
 export { renderProjects }
