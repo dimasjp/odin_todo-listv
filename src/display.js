@@ -55,6 +55,12 @@ const renderProjectTasks = (project, index) => {
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
     projectPageHeader.appendChild(addTaskButton);
+
+    addTaskButton.addEventListener('click', () => {
+        openModal();
+        form.classList.add('task-form');
+        createForm()
+    })
 }
 
 export { renderProjects }

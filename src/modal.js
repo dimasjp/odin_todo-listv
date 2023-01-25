@@ -2,6 +2,7 @@
 
 const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.btn-close-modal');
+const form = document.querySelector('#modal-form');
 
 
 
@@ -17,6 +18,7 @@ document.addEventListener('click', (event) => {
 })
 
 const closeModal = () => {
+    form.classList.remove('project-form', 'task-form');
     modal.classList.add('display-none')
 }
 
