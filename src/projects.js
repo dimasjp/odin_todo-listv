@@ -12,13 +12,11 @@ let projectsArray = [];
 const createProject = (title) => {
     const newProject = projectFactory(title);
     projectsArray.push(newProject);
-    console.log(projectsArray)
-    renderProjects();
 }
 
 const removeProject = (index) => {
     projectsArray.splice(index, 1);
-    renderProjects();
+    renderProjects(projectsArray);
 }
 
 export { createProject, projectFactory, projectsArray, removeProject }

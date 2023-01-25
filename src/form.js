@@ -1,19 +1,14 @@
-import { createProject } from "./projects";
+import { closeModal } from "./modal";
+import { createProject, projectsArray } from "./projects";
+import { renderProjects, renderProjectTasks } from "./display";
+import { createTask } from "./tasks";
 
 const modalContainer = document.querySelector('.modal-content');
 const formField = document.querySelector('#modal-form');
-const submitButton = document.querySelector('.btn-form-submit');
-
-const createForm = () => {
-    if (formField.classList.contains('project-form')) {
-        createProjectForm();
-    } else if (formField.classList.contains('task-form')) {
-        createTaskForm();
-    }
-}
 
 const createProjectForm = () => {
     formField.innerHTML = '';
+    formField.classList.add('project-form');
 
     const formTitle = document.createElement('p');
     formTitle.classList.add('form-title');
@@ -26,11 +21,26 @@ const createProjectForm = () => {
     titleInput.setAttribute('id', 'title-input');
     titleInput.setAttribute('name', 'title-input');
 
-    formField.append(formTitle, titleInput);
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('btn-submit-form');
+    submitButton.classList.add('submit-project');
+    submitButton.textContent = "Submit";
+
+    formField.append(formTitle, titleInput, submitButton);
+  
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        createProject(titleInput.value);
+        console.log(projectsArray);
+        renderProjects(projectsArray);
+        submitButton.classList.remove('submit-project');
+        formField.reset();
+    })
 }
 
-const createTaskForm = () => {
+const createTaskForm = (projectIndex) => {
     formField.innerHTML = '';
+    formField.classList.add('task-form');
 
     const formTitle = document.createElement('p');
     formTitle.classList.add('form-title');
@@ -43,19 +53,21 @@ const createTaskForm = () => {
     titleInput.setAttribute('id', 'title-input');
     titleInput.setAttribute('name', 'title-input');
 
-    formField.append(formTitle, titleInput)
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('btn-submit-form');
+    submitButton.classList.add('submit-task');
+    submitButton.textContent = "Submit";
+
+    formField.append(formTitle, titleInput, submitButton);
+
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        createTask(projectIndex, titleInput.value);
+        renderProjectTasks(projectsArray[projectIndex], projectIndex);
+        submitButton.classList.remove('submit-task');
+        formField.reset();
+    })
 }
 
-submitButton.addEventListener('click', () => {
-    submitForm();
-})
 
-
-const submitForm = () => {
-    if (formField.classList.contains('project-form')) {
-        const titleInput = document.querySelector('.title-input');
-        createProject(titleInput.value);
-    }
-}
-
-export { createForm }
+export { createProjectForm, createTaskForm }

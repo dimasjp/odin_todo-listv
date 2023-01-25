@@ -1,12 +1,13 @@
+import { renderProjectTasks } from "./display";
 import { projectsArray } from "./projects"
 
 const taskFactory = (name, date, priority) => {
     return { name , date, priority}
 }
 
-const createTask = (name, date, priority) => {
+const createTask = (projectIndex, name, date, priority) => {
     const newTask = taskFactory(name, date, priority);
-    projectsArray[0].projectTasks.push(newTask);
+    projectsArray[projectIndex].projectTasks.push(newTask);
 }
 
 

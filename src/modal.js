@@ -4,12 +4,12 @@ const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.btn-close-modal');
 const form = document.querySelector('#modal-form');
 
-
-
 const openModal = () => {
     modal.classList.remove('display-none');
     
 }
+
+
 
 document.addEventListener('click', (event) => {
     if (event.target === modal || event.target === closeButton) {
@@ -18,7 +18,8 @@ document.addEventListener('click', (event) => {
 })
 
 const closeModal = () => {
-    form.classList.remove('project-form', 'task-form');
+    form.classList.remove('project-form');
+    form.classList.remove('task-form');
     modal.classList.add('display-none')
 }
 
