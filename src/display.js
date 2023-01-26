@@ -73,6 +73,14 @@ const renderProjectTasks = (project, projectIndex) => {
         const taskTitle = document.createElement('div');
         taskTitle.textContent = task.name;
         taskCard.appendChild(taskTitle);
+
+        const taskDue = document.createElement('div');
+        taskDue.textContent = task.date;
+        taskCard.appendChild(taskDue);
+
+        const taskPrio = document.createElement('div');
+        taskPrio.textContent = task.priority;
+        taskCard.appendChild(taskPrio);
         
         const taskRemoveButton = document.createElement('button');
         taskRemoveButton.classList.add('task-remove-btn');
