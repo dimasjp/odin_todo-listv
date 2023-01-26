@@ -22,7 +22,10 @@ const closeModal = () => {
     form.classList.remove('project-form');
     form.classList.remove('task-form');
     form.classList.remove('task-detail');
+    form.classList.remove('edit-form');
+    form.reset();
     modal.classList.add('display-none')
+    form.innerHTML = '';
 }
 
 export {openModal, closeModal}

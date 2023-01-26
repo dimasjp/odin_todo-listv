@@ -1,7 +1,7 @@
 import { closeModal } from "./modal";
 import { createProject, projectsArray } from "./projects";
 import { renderProjects, renderProjectTasks } from "./display";
-import { createTask } from "./tasks";
+import { createTask, updateTask } from "./tasks";
 
 const modalContainer = document.querySelector('.modal-content');
 const formField = document.querySelector('#modal-form');
@@ -59,7 +59,7 @@ const createTaskForm = (projectIndex) => {
 
     const prioInput = document.createElement('input')
     prioInput.setAttribute('type', 'radio');
-    prioInput.setAttribute('id', 'prio-high');
+    prioInput.setAttribute('id', 'prio-low');
     prioInput.setAttribute('name', 'prio-input');
     prioInput.setAttribute('value', 'low');
 
@@ -74,19 +74,19 @@ const createTaskForm = (projectIndex) => {
     submitButton.classList.add('submit-task');
     submitButton.textContent = "Submit";
 
-    formField.append(formTitle, titleInput, dateInput, prioInput, prioInputW,submitButton);
+    formField.append(formTitle, titleInput, dateInput, prioInput, prioInputW, submitButton);
 
     const radioInput = document.querySelectorAll('input[name="prio-input"]');
 
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
-        let priority;
+        let prio;
         radioInput.forEach((a) => {
             if (a.checked === true) {
-                priority = a.value;
+                prio = a.value;
             }
         })
-        createTask(projectIndex, titleInput.value, dateInput.value, priority);
+        createTask(projectIndex, titleInput.value, dateInput.value, prio);
         renderProjectTasks(projectsArray[projectIndex], projectIndex);
         submitButton.classList.remove('submit-task');
         formField.reset();
@@ -113,5 +113,68 @@ const createTaskDetail = (projectIndex, taskIndex) => {
     formField.append(taskTitle, taskDue, taskPrio);
 }
 
+const createEditForm = (projectIndex, index) => {
+    formField.innerHTML = '';
+    formField.classList.add('edit-form');
 
-export { createProjectForm, createTaskForm, createTaskDetail }
+    const formTitle = document.createElement('p');
+    formTitle.classList.add('form-title');
+    formTitle.textContent = "Edit Task";
+
+    const titleInput = document.createElement('input');
+    titleInput.setAttribute('type', 'text');
+    titleInput.setAttribute('id', 'edit-title');
+    titleInput.setAttribute('name', 'edit-title');
+
+    const dateInput = document.createElement('input');
+    dateInput.setAttribute('type', 'date');
+    dateInput.setAttribute('id', 'edit-date');
+    dateInput.setAttribute('name', 'edit-date');
+
+    const prioInput = document.createElement('input')
+    prioInput.setAttribute('type', 'radio');
+    prioInput.setAttribute('id', 'prio-low');
+    prioInput.setAttribute('name', 'edit-prio');
+    prioInput.setAttribute('value', 'low');
+
+    const prioInputW = document.createElement('input')
+    prioInputW.setAttribute('type', 'radio');
+    prioInputW.setAttribute('id', 'prio-high');
+    prioInputW.setAttribute('name', 'edit-prio');
+    prioInputW.setAttribute('value', 'high');
+
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('btn-submit-form');
+    submitButton.classList.add('submit-edit');
+    submitButton.textContent = "Edit";
+
+    formField.append(formTitle, titleInput, dateInput, prioInput, prioInputW, submitButton);
+
+    titleInput.value = projectsArray[projectIndex].projectTasks[index].name;
+    dateInput.value = projectsArray[projectIndex].projectTasks[index].date;
+
+    const radioInput = document.querySelectorAll('input[name="edit-prio"]');
+
+    radioInput.forEach((a) => {
+        if (a.value === projectsArray[projectIndex].projectTasks[index].priority) {
+            a.checked = true;
+        }
+    })
+
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        let prio;
+        radioInput.forEach((a) => {
+            if (a.checked === true) {
+                prio = a.value;
+            }
+        })
+        updateTask(projectIndex, index, titleInput.value, dateInput.value, prio)
+        submitButton.classList.remove('submit-edit');
+        formField.reset();
+        closeModal();
+    })
+}
+
+
+export { createProjectForm, createTaskForm, createTaskDetail, createEditForm }

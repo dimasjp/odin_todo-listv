@@ -1,6 +1,6 @@
 import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
-import { createProjectForm, createTaskDetail, createTaskForm } from "./form";
+import { createEditForm, createProjectForm, createTaskDetail, createTaskForm } from "./form";
 import { removeTask } from "./tasks";
 
 const openProjectModal = document.querySelector('.open-project-modal');
@@ -69,11 +69,6 @@ const renderProjectTasks = (project, projectIndex) => {
     project.projectTasks.forEach((task, index) => {
         const taskCard = document.createElement('div');
         taskContainer.appendChild(taskCard);
-        
-        taskCard.addEventListener('click', () => {
-            openModal();
-            createTaskDetail(projectIndex, index);
-        })
 
         const taskTitle = document.createElement('div');
         taskTitle.textContent = task.name;
@@ -86,7 +81,26 @@ const renderProjectTasks = (project, projectIndex) => {
         const taskPrio = document.createElement('div');
         taskPrio.textContent = task.priority;
         taskCard.appendChild(taskPrio);
-        
+
+        const taskDetail = document.createElement('button');
+        taskDetail.textContent = 'Detail';
+        taskCard.appendChild(taskDetail)
+
+        taskDetail.addEventListener('click', () => {
+            openModal();
+            createTaskDetail(projectIndex, index);
+        })
+
+        const taskEditButton = document.createElement('button');
+        taskEditButton.classList.add('task-edit-btn');
+        taskEditButton.textContent = 'EDIT';
+        taskCard.appendChild(taskEditButton);
+
+        taskEditButton.addEventListener('click', () => {
+            openModal();
+            createEditForm(projectIndex, index);
+        })
+
         const taskRemoveButton = document.createElement('button');
         taskRemoveButton.classList.add('task-remove-btn');
         taskRemoveButton.textContent = 'X';
