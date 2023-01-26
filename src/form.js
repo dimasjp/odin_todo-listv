@@ -94,5 +94,24 @@ const createTaskForm = (projectIndex) => {
     })
 }
 
+const createTaskDetail = (projectIndex, taskIndex) => {
+    formField.innerHTML = '';
+    formField.classList.add('task-detail');
 
-export { createProjectForm, createTaskForm }
+    const taskTitle = document.createElement('div');
+    taskTitle.classList.add('detail-task-title');
+    taskTitle.textContent = projectsArray[projectIndex].projectTasks[taskIndex].name;
+
+    const taskDue = document.createElement('div');
+    taskDue.classList.add('detail-task-date');
+    taskDue.textContent = projectsArray[projectIndex].projectTasks[taskIndex].date;
+
+    const taskPrio = document.createElement('div');
+    taskPrio.classList.add('detail-task-prio');
+    taskPrio.textContent = projectsArray[projectIndex].projectTasks[taskIndex].priority;
+
+    formField.append(taskTitle, taskDue, taskPrio);
+}
+
+
+export { createProjectForm, createTaskForm, createTaskDetail }

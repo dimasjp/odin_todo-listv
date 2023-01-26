@@ -1,6 +1,6 @@
 import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
-import { createProjectForm, createTaskForm } from "./form";
+import { createProjectForm, createTaskDetail, createTaskForm } from "./form";
 import { removeTask } from "./tasks";
 
 const openProjectModal = document.querySelector('.open-project-modal');
@@ -69,6 +69,11 @@ const renderProjectTasks = (project, projectIndex) => {
     project.projectTasks.forEach((task, index) => {
         const taskCard = document.createElement('div');
         taskContainer.appendChild(taskCard);
+        
+        taskCard.addEventListener('click', () => {
+            openModal();
+            createTaskDetail(projectIndex, index);
+        })
 
         const taskTitle = document.createElement('div');
         taskTitle.textContent = task.name;
