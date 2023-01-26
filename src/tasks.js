@@ -10,5 +10,10 @@ const createTask = (projectIndex, name, date, priority) => {
     projectsArray[projectIndex].projectTasks.push(newTask);
 }
 
+const removeTask = (projectIndex, taskIndex) => {
+    projectsArray[projectIndex].projectTasks.splice(taskIndex, 1);
+    renderProjectTasks(projectsArray[projectIndex], projectIndex);
+}
 
-export { taskFactory, createTask }
+
+export { taskFactory, createTask, removeTask }

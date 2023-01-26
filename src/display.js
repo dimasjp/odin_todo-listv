@@ -1,6 +1,7 @@
 import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
 import { createProjectForm, createTaskForm } from "./form";
+import { removeTask } from "./tasks";
 
 const openProjectModal = document.querySelector('.open-project-modal');
 const form = document.querySelector('#modal-form');
@@ -72,6 +73,15 @@ const renderProjectTasks = (project, projectIndex) => {
         const taskTitle = document.createElement('div');
         taskTitle.textContent = task.name;
         taskCard.appendChild(taskTitle);
+        
+        const taskRemoveButton = document.createElement('button');
+        taskRemoveButton.classList.add('task-remove-btn');
+        taskRemoveButton.textContent = 'X';
+        taskCard.appendChild(taskRemoveButton);
+
+        taskRemoveButton.addEventListener('click', () => {
+            removeTask(projectIndex, index);
+        })
     })
 }
 
