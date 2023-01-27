@@ -9,7 +9,6 @@ const form = document.querySelector('#modal-form');
 
 const openModal = () => {
     modal.classList.remove('display-none');
-    
 }
 
 document.addEventListener('click', (event) => {
@@ -19,11 +18,8 @@ document.addEventListener('click', (event) => {
 })
 
 const closeModal = () => {
-    form.classList.remove('project-form');
-    form.classList.remove('task-form');
-    form.classList.remove('task-detail');
-    form.classList.remove('edit-form');
     form.reset();
+    form.removeAttribute('class');
     modal.classList.add('display-none')
     form.innerHTML = '';
 }
@@ -45,8 +41,6 @@ const createProjectForm = () => {
         e.preventDefault();
         createProject(titleInput.value);
         renderProjects(projectsArray);
-        submitButton.classList.remove('submit-project');
-        form.reset();
         closeModal();
     })
 }
@@ -81,8 +75,6 @@ const createTaskForm = (projectIndex) => {
         })
         createTask(projectIndex, titleInput.value, dateInput.value, prio);
         renderProjectTasks(projectsArray[projectIndex], projectIndex);
-        submitButton.classList.remove('submit-task');
-        form.reset();
         closeModal();
     })
 }
@@ -140,8 +132,6 @@ const createEditForm = (projectIndex, index) => {
             }
         })
         updateTask(projectIndex, index, titleInput.value, dateInput.value, prio)
-        submitButton.classList.remove('submit-edit');
-        form.reset();
         closeModal();
     })
 }
