@@ -1,6 +1,7 @@
 import { createProject, projectsArray } from "./projects";
 import { renderProjects, renderProjectTasks } from "./display";
 import { createTask, updateTask } from "./tasks";
+import element from "./create-element";
 
 const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.btn-close-modal');
@@ -31,20 +32,12 @@ const createProjectForm = () => {
     form.innerHTML = '';
     form.classList.add('project-form');
 
-    const formTitle = document.createElement('p');
-    formTitle.classList.add('form-title');
-    formTitle.textContent = "Add New Project";
+    const formTitle = element.createPara('form-title');
+    const titleInput = element.createInput('text', 'title');
+    const submitButton = element.createButton('btn-submit-form');
 
-    const titleInput = document.createElement('input');
-    titleInput.placeholder = "Project";
-    titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('id', 'title-input');
-    titleInput.setAttribute('name', 'title-input');
-
-    const submitButton = document.createElement('button');
-    submitButton.classList.add('btn-submit-form');
-    submitButton.classList.add('submit-project');
-    submitButton.textContent = "Submit";
+    formTitle.textContent = 'Add New Project';
+    submitButton.textContent = 'Submit';
 
     form.append(formTitle, titleInput, submitButton);
 
@@ -62,39 +55,19 @@ const createTaskForm = (projectIndex) => {
     form.innerHTML = '';
     form.classList.add('task-form');
 
-    const formTitle = document.createElement('p');
-    formTitle.classList.add('form-title');
-    formTitle.textContent = "Add New Task";
+    const formTitle = element.createPara('form-title');
+    const titleInput = element.createInput('text', 'title');
+    const dateInput = element.createInput('date', 'date');
+    const prioInputL = element.createInput('radio', 'prio');
+    const prioInputH = element.createInput('radio', 'prio');
+    const submitButton = element.createButton('btn-submit-form');
 
-    const titleInput = document.createElement('input');
-    titleInput.placeholder = "Task";
-    titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('id', 'title-input');
-    titleInput.setAttribute('name', 'title-input');
+    formTitle.textContent = 'Add New Task';
+    prioInputL.setAttribute('value', 'low');
+    prioInputH.setAttribute('value', 'high');
+    submitButton.textContent = 'Submit';
 
-    const dateInput = document.createElement('input');
-    dateInput.setAttribute('type', 'date');
-    dateInput.setAttribute('id', 'date-input');
-    dateInput.setAttribute('name', 'date-input');
-
-    const prioInput = document.createElement('input')
-    prioInput.setAttribute('type', 'radio');
-    prioInput.setAttribute('id', 'prio-low');
-    prioInput.setAttribute('name', 'prio-input');
-    prioInput.setAttribute('value', 'low');
-
-    const prioInputW = document.createElement('input')
-    prioInputW.setAttribute('type', 'radio');
-    prioInputW.setAttribute('id', 'prio-high');
-    prioInputW.setAttribute('name', 'prio-input');
-    prioInputW.setAttribute('value', 'high');
-
-    const submitButton = document.createElement('button');
-    submitButton.classList.add('btn-submit-form');
-    submitButton.classList.add('submit-task');
-    submitButton.textContent = "Submit";
-
-    form.append(formTitle, titleInput, dateInput, prioInput, prioInputW, submitButton);
+    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, submitButton);
 
     const radioInput = document.querySelectorAll('input[name="prio-input"]');
 
@@ -117,17 +90,13 @@ const createTaskForm = (projectIndex) => {
 const createTaskDetail = (projectIndex, taskIndex) => {
     form.innerHTML = '';
     form.classList.add('task-detail');
+ 
+    const taskTitle = element.createPara('detail-task-title');
+    const taskDue = element.createPara('detail-task-date');
+    const taskPrio = element.createPara('detail-task-prio');
 
-    const taskTitle = document.createElement('div');
-    taskTitle.classList.add('detail-task-title');
     taskTitle.textContent = projectsArray[projectIndex].projectTasks[taskIndex].name;
-
-    const taskDue = document.createElement('div');
-    taskDue.classList.add('detail-task-date');
     taskDue.textContent = projectsArray[projectIndex].projectTasks[taskIndex].date;
-
-    const taskPrio = document.createElement('div');
-    taskPrio.classList.add('detail-task-prio');
     taskPrio.textContent = projectsArray[projectIndex].projectTasks[taskIndex].priority;
 
     form.append(taskTitle, taskDue, taskPrio);
@@ -137,43 +106,24 @@ const createEditForm = (projectIndex, index) => {
     form.innerHTML = '';
     form.classList.add('edit-form');
 
-    const formTitle = document.createElement('p');
-    formTitle.classList.add('form-title');
-    formTitle.textContent = "Edit Task";
+    const formTitle = element.createPara('form-title');
+    const titleInput = element.createInput('text', 'title');
+    const dateInput = element.createInput('date', 'date');
+    const prioInputL = element.createInput('radio', 'prio');
+    const prioInputH = element.createInput('radio', 'prio');
+    const submitButton = element.createButton('btn-submit-form');
 
-    const titleInput = document.createElement('input');
-    titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('id', 'edit-title');
-    titleInput.setAttribute('name', 'edit-title');
+    formTitle.textContent = 'Edit Task';
+    prioInputL.setAttribute('value', 'low');
+    prioInputH.setAttribute('value', 'high');
+    submitButton.textContent = 'Edit';
 
-    const dateInput = document.createElement('input');
-    dateInput.setAttribute('type', 'date');
-    dateInput.setAttribute('id', 'edit-date');
-    dateInput.setAttribute('name', 'edit-date');
-
-    const prioInput = document.createElement('input')
-    prioInput.setAttribute('type', 'radio');
-    prioInput.setAttribute('id', 'prio-low');
-    prioInput.setAttribute('name', 'edit-prio');
-    prioInput.setAttribute('value', 'low');
-
-    const prioInputW = document.createElement('input')
-    prioInputW.setAttribute('type', 'radio');
-    prioInputW.setAttribute('id', 'prio-high');
-    prioInputW.setAttribute('name', 'edit-prio');
-    prioInputW.setAttribute('value', 'high');
-
-    const submitButton = document.createElement('button');
-    submitButton.classList.add('btn-submit-form');
-    submitButton.classList.add('submit-edit');
-    submitButton.textContent = "Edit";
-
-    form.append(formTitle, titleInput, dateInput, prioInput, prioInputW, submitButton);
+    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, submitButton);
 
     titleInput.value = projectsArray[projectIndex].projectTasks[index].name;
     dateInput.value = projectsArray[projectIndex].projectTasks[index].date;
 
-    const radioInput = document.querySelectorAll('input[name="edit-prio"]');
+    const radioInput = document.querySelectorAll('input[name="prio-input"]');
 
     radioInput.forEach((a) => {
         if (a.value === projectsArray[projectIndex].projectTasks[index].priority) {
