@@ -30,7 +30,6 @@ const createProjectForm = () => {
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
         createProject(titleInput.value);
-        console.log(projectsArray);
         renderProjects(projectsArray);
         submitButton.classList.remove('submit-project');
         formField.reset();
