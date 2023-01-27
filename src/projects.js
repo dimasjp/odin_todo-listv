@@ -13,14 +13,14 @@ const createProject = (title) => {
     const newProject = projectFactory(title);
     projectsArray.push(newProject);
     updateStorage();
-    console.log(projectsArray)
+    console.log(projectsArray);
 }
 
 const removeProject = (index) => {
     projectsArray.splice(index, 1);
     renderProjects(projectsArray);
     updateStorage();
-    console.log(projectsArray)
+    console.log(projectsArray);
 }
 
 const updateStorage = () => {

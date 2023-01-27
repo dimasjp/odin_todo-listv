@@ -1,6 +1,6 @@
 import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
-import { createEditForm, createProjectForm, createTaskDetail, createTaskForm } from "./form";
+import { createEditForm, createProjectForm, createTaskDetail, createTaskForm } from "./modal";
 import { removeTask } from "./tasks";
 
 const openProjectModal = document.querySelector('.open-project-modal');
