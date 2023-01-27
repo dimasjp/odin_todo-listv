@@ -2,13 +2,13 @@ import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
 import { createEditForm, createProjectForm, createTaskDetail, createTaskForm } from "./modal";
 import { removeTask } from "./tasks";
+import element from "./create-element";
 
 const openProjectModal = document.querySelector('.open-project-modal');
 const form = document.querySelector('#modal-form');
 
 openProjectModal.addEventListener('click', () => {
-    openModal();
-    form.classList.add('project-form');
+    openModal('project-form');
     createProjectForm();
 })
 
@@ -17,23 +17,20 @@ const renderProjects = (projects) => {
     projectContainer.innerHTML = '';
 
     projects.forEach((project, projectIndex, tasks) => {
-        const projectCard = document.createElement('div');
-        projectCard.classList.add('project-card');
+        const projectCard = element.createDiv('project-card');
         projectContainer.appendChild(projectCard);
 
         projectCard.addEventListener('click', () => {
             renderProjectTasks(project, projectIndex);
         })
 
-        const projectCardTitle = document.createElement('p');
-        projectCardTitle.classList.add('project-title');
+        const projectCardTitle = element.createPara('project-title');
         projectCardTitle.textContent = project.title;
-        projectCard.appendChild(projectCardTitle);
 
-        const projectRemoveButton = document.createElement('button');
-        projectRemoveButton.classList.add('project-remove-btn');
+        const projectRemoveButton = element.createButton('btn-project-remove');
         projectRemoveButton.textContent = 'X';
-        projectCard.appendChild(projectRemoveButton);
+
+        projectCard.append(projectCardTitle, projectRemoveButton);
 
         projectRemoveButton.addEventListener('click', () => {
             removeProject(projectIndex);
@@ -45,16 +42,16 @@ const renderProjectTasks = (project, projectIndex) => {
     const main = document.querySelector('.main');
     main.innerHTML = '';
 
-    const projectPageHeader = document.createElement('div');
+    const projectPageHeader = element.createDiv('project-head');
     main.appendChild(projectPageHeader);
 
-    const projectPageTitle = document.createElement('div');
+    const projectPageTitle = element.createPara('project-head-title');
     projectPageTitle.textContent = project.title;
-    projectPageHeader.appendChild(projectPageTitle);
 
-    const addTaskButton = document.createElement('button');
+    const addTaskButton = element.createButton('btn-task-add');
     addTaskButton.textContent = 'Add Task';
-    projectPageHeader.appendChild(addTaskButton);
+
+    projectPageHeader.append(projectPageTitle, addTaskButton);
 
     addTaskButton.addEventListener('click', () => {
         openModal();
@@ -62,51 +59,40 @@ const renderProjectTasks = (project, projectIndex) => {
         createTaskForm(projectIndex)
     })
 
-    const taskContainer = document.createElement('div');
-    taskContainer.classList.add('task-container');
+    const taskContainer = element.createDiv('task-container');
     main.appendChild(taskContainer);
 
     project.projectTasks.forEach((task, index) => {
-        const taskCard = document.createElement('div');
+        const taskCard = element.createDiv('task-card');
         taskContainer.appendChild(taskCard);
 
-        const taskTitle = document.createElement('div');
+        const taskTitle = element.createPara('task-title');
+        const taskDue = element.createPara('task-date');
+        const taskPrio = element.createPara('task-prio');
+        const taskDetailBtn = element.createButton('btn-task-detail');
+        const taskEditBtn = element.createButton('btn-task-edit');
+        const taskRemoveBtn = element.createButton('btn-task-remove');
+
         taskTitle.textContent = task.name;
-        taskCard.appendChild(taskTitle);
-
-        const taskDue = document.createElement('div');
         taskDue.textContent = task.date;
-        taskCard.appendChild(taskDue);
-
-        const taskPrio = document.createElement('div');
         taskPrio.textContent = task.priority;
-        taskCard.appendChild(taskPrio);
+        taskDetailBtn.textContent = 'Detail';
+        taskEditBtn.textContent = 'Edit';
+        taskRemoveBtn.textContent = 'X';
 
-        const taskDetail = document.createElement('button');
-        taskDetail.textContent = 'Detail';
-        taskCard.appendChild(taskDetail)
+        taskCard.append(taskTitle, taskDue, taskPrio, taskDetailBtn, taskEditBtn, taskRemoveBtn)
 
-        taskDetail.addEventListener('click', () => {
+        taskDetailBtn.addEventListener('click', () => {
             openModal();
             createTaskDetail(projectIndex, index);
         })
 
-        const taskEditButton = document.createElement('button');
-        taskEditButton.classList.add('task-edit-btn');
-        taskEditButton.textContent = 'EDIT';
-        taskCard.appendChild(taskEditButton);
-
-        taskEditButton.addEventListener('click', () => {
+        taskEditBtn.addEventListener('click', () => {
             openModal();
             createEditForm(projectIndex, index);
         })
 
-        const taskRemoveButton = document.createElement('button');
-        taskRemoveButton.classList.add('task-remove-btn');
-        taskRemoveButton.textContent = 'X';
-        taskCard.appendChild(taskRemoveButton);
-
-        taskRemoveButton.addEventListener('click', () => {
+        taskRemoveBtn.addEventListener('click', () => {
             removeTask(projectIndex, index);
         })
     })

@@ -7,7 +7,8 @@ const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.btn-close-modal');
 const form = document.querySelector('#modal-form');
 
-const openModal = () => {
+const openModal = (className) => {
+    form.classList.add(className);
     modal.classList.remove('display-none');
 }
 
@@ -26,7 +27,6 @@ const closeModal = () => {
 
 const createProjectForm = () => {
     form.innerHTML = '';
-    form.classList.add('project-form');
 
     const formTitle = element.createPara('form-title');
     const titleInput = element.createInput('text', 'title');
@@ -47,7 +47,6 @@ const createProjectForm = () => {
 
 const createTaskForm = (projectIndex) => {
     form.innerHTML = '';
-    form.classList.add('task-form');
 
     const formTitle = element.createPara('form-title');
     const titleInput = element.createInput('text', 'title');
@@ -81,7 +80,6 @@ const createTaskForm = (projectIndex) => {
 
 const createTaskDetail = (projectIndex, taskIndex) => {
     form.innerHTML = '';
-    form.classList.add('task-detail');
  
     const taskTitle = element.createPara('detail-task-title');
     const taskDue = element.createPara('detail-task-date');
@@ -96,7 +94,6 @@ const createTaskDetail = (projectIndex, taskIndex) => {
 
 const createEditForm = (projectIndex, index) => {
     form.innerHTML = '';
-    form.classList.add('edit-form');
 
     const formTitle = element.createPara('form-title');
     const titleInput = element.createInput('text', 'title');
