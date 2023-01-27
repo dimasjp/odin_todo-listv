@@ -1,5 +1,5 @@
 import { renderProjectTasks } from "./display";
-import { projectsArray } from "./projects"
+import { projectsArray, saveToStorage } from "./projects"
 
 const taskFactory = (name, date, priority) => {
     return { name , date, priority}
@@ -9,6 +9,7 @@ const createTask = (projectIndex, name, date, priority) => {
     const newTask = taskFactory(name, date, priority);
     projectsArray[projectIndex].projectTasks.push(newTask);
     console.log(priority);
+    saveToStorage();
 }
 
 const removeTask = (projectIndex, taskIndex) => {
