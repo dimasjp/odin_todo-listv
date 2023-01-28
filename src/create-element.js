@@ -6,6 +6,12 @@ const element = (() => {
         return div
     };
 
+    const createH1 = (className) => {
+        const h1 = document.createElement('h1');
+        h1.classList.add(className);
+        return h1
+    }
+
     const createPara = (className) => {
         const para = document.createElement('p');
         para.classList.add(className);
@@ -22,12 +28,14 @@ const element = (() => {
 
     const createButton = (className) => {
         const btn = document.createElement('button');
+        btn.classList.add('btn');
         btn.classList.add(className);
         return btn;
     };
 
     return {
         createDiv,
+        createH1,
         createPara,
         createInput,
         createButton

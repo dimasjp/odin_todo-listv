@@ -5,7 +5,7 @@ import { removeTask } from "./tasks";
 import element from "./create-element";
 
 const openProjectModal = document.querySelector('.open-project-modal');
-const form = document.querySelector('#modal-form');
+const main = document.querySelector('.main');
 
 openProjectModal.addEventListener('click', () => {
     openModal('project-form');
@@ -45,7 +45,7 @@ const renderProjectTasks = (project, projectIndex) => {
     const projectPageHeader = element.createDiv('project-head');
     main.appendChild(projectPageHeader);
 
-    const projectPageTitle = element.createPara('project-head-title');
+    const projectPageTitle = element.createH1('project-head-title');
     projectPageTitle.textContent = project.title;
 
     const addTaskButton = element.createButton('btn-task-add');
@@ -54,8 +54,7 @@ const renderProjectTasks = (project, projectIndex) => {
     projectPageHeader.append(projectPageTitle, addTaskButton);
 
     addTaskButton.addEventListener('click', () => {
-        openModal();
-        form.classList.add('task-form');
+        openModal('task-form');
         createTaskForm(projectIndex)
     })
 
@@ -83,12 +82,12 @@ const renderProjectTasks = (project, projectIndex) => {
         taskCard.append(taskTitle, taskDue, taskPrio, taskDetailBtn, taskEditBtn, taskRemoveBtn)
 
         taskDetailBtn.addEventListener('click', () => {
-            openModal();
+            openModal('task-detail');
             createTaskDetail(projectIndex, index);
         })
 
         taskEditBtn.addEventListener('click', () => {
-            openModal();
+            openModal('task-edit');
             createEditForm(projectIndex, index);
         })
 

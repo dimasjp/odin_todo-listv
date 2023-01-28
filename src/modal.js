@@ -4,7 +4,6 @@ import { createTask, updateTask } from "./tasks";
 import element from "./create-element";
 
 const modal = document.querySelector('.modal');
-const closeButton = document.querySelector('.btn-close-modal');
 const form = document.querySelector('#modal-form');
 
 const openModal = (className) => {
@@ -13,7 +12,7 @@ const openModal = (className) => {
 }
 
 document.addEventListener('click', (event) => {
-    if (event.target === modal || event.target === closeButton) {
+    if (event.target === modal || event.target.classList.contains('btn-close-form')) {
         closeModal();
     }
 })
@@ -30,12 +29,14 @@ const createProjectForm = () => {
 
     const formTitle = element.createPara('form-title');
     const titleInput = element.createInput('text', 'title');
+    const closeButton = element.createButton('btn-close-form');
     const submitButton = element.createButton('btn-submit-form');
 
     formTitle.textContent = 'Add New Project';
+    closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Submit';
 
-    form.append(formTitle, titleInput, submitButton);
+    form.append(formTitle, titleInput, closeButton, submitButton);
 
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -53,14 +54,16 @@ const createTaskForm = (projectIndex) => {
     const dateInput = element.createInput('date', 'date');
     const prioInputL = element.createInput('radio', 'prio');
     const prioInputH = element.createInput('radio', 'prio');
+    const closeButton = element.createButton('btn-close-form');
     const submitButton = element.createButton('btn-submit-form');
 
     formTitle.textContent = 'Add New Task';
     prioInputL.setAttribute('value', 'low');
     prioInputH.setAttribute('value', 'high');
+    closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Submit';
 
-    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, submitButton);
+    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
 
     const radioInput = document.querySelectorAll('input[name="prio-input"]');
 
@@ -100,14 +103,16 @@ const createEditForm = (projectIndex, index) => {
     const dateInput = element.createInput('date', 'date');
     const prioInputL = element.createInput('radio', 'prio');
     const prioInputH = element.createInput('radio', 'prio');
+    const closeButton = element.createButton('btn-close-form');
     const submitButton = element.createButton('btn-submit-form');
 
     formTitle.textContent = 'Edit Task';
     prioInputL.setAttribute('value', 'low');
     prioInputH.setAttribute('value', 'high');
+    closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Edit';
 
-    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, submitButton);
+    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
 
     titleInput.value = projectsArray[projectIndex].projectTasks[index].name;
     dateInput.value = projectsArray[projectIndex].projectTasks[index].date;

@@ -7,19 +7,20 @@
 <script defer src="main.js"></script></head>
 <body>
     <div id="content">
-        <header class="header">
+        <header class="title-bar"><h1 class="page-title">ToDo List</h1></header>
+        <div class="nav-container">
             <nav id="project-nav">
+                <h1 class="project-nav-head">Projects</h1>
                 <div class="project-nav-control">
-                    <button class="open-project-modal">Create Project</button>
+                    <button class="btn open-project-modal">Create Project</button>
                 </div>
                 <div class="project-container"></div>
             </nav>
-        </header>
+        </div>
         <div class="main"></div>
     </div>
     <div class="modal display-none">
         <div class="modal-content">
-            <button class="btn-close-modal">X</button>
             <form action="" id="modal-form" name="modal-form"></form>
         </div>
     </div>
