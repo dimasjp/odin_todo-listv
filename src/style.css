@@ -11,6 +11,10 @@
     src: url(./assets/fonts/ChiKareGo2.ttf);
 }
 
+* {
+    margin: 0;
+}
+
 html {
     min-height: 100%;
     margin: 0;
@@ -27,11 +31,13 @@ body {
 }
 
 #content {
-    height: 50%;
-    width: 50%;
+    height: 60%;
+    width: 60%;
+    max-width: 1200px; 
+    max-height: 800px;
     display: grid;
     grid-template-columns: max-content 1fr;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: max-content max-content;
     grid-template-areas: 
     'head head'
     'nav main';
@@ -68,6 +74,28 @@ body {
     padding: 1.5rem;
     width: 250px;
     border-right: solid 1px var(--col-black);
+    display: flex;
+}
+
+#project-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-container {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: row;
+    font-family: Chicago-12;
+    font-size: 24px;
 }
 
 h1 {
@@ -78,6 +106,7 @@ h1 {
 .main {
     grid-area: main;
     padding: 1.5rem;
+    height: 100%;
 }
 
 .btn {
@@ -101,6 +130,21 @@ h1 {
     padding: 0;
 }
 
+.task-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--col-white);
+    border: solid 1px var(--col-black);
+    margin: 5px;
+}
+
+.task-card-left {
+    display: flex;
+    flex-direction: row;
+}
+
 .modal {
     display: flex;
     align-items: center;
@@ -115,13 +159,27 @@ h1 {
 .modal-content {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    margin: 15% auto;
     height: fit-content;
     width: fit-content;
-    border-radius: 5px;
-    border: 1px solid red;
-    background-color: white;
+    background: var(--col-white);
+    border: 0.1em solid var(--col-black);
+}
+
+.form-title {
+    padding: 0 0.5em;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+    text-align: center;
+    background: var(--col-white);
+    cursor: default;
+    font-family: Chicago-12;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 input {

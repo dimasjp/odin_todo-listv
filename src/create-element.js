@@ -18,6 +18,12 @@ const element = (() => {
         return para;
     };
 
+    const createLi = (className) => {
+        const li = document.createElement('li');
+        li.classList.add(className);
+        return li;
+    }
+
     const createInput = (inputType, inputId) => {
         const input = document.createElement('input');
         input.setAttribute('type', inputType);
@@ -37,6 +43,7 @@ const element = (() => {
         createDiv,
         createH1,
         createPara,
+        createLi,
         createInput,
         createButton
     };

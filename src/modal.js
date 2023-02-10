@@ -5,6 +5,7 @@ import element from "./create-element";
 
 const modal = document.querySelector('.modal');
 const form = document.querySelector('#modal-form');
+const formHead = document.querySelector('.form-head');
 
 const openModal = (className) => {
     form.classList.add(className);
@@ -25,9 +26,11 @@ const closeModal = () => {
 }
 
 const createProjectForm = () => {
-    form.innerHTML = '';
+    formHead.innerHTML = '';
 
-    const formTitle = element.createPara('form-title');
+    const formTitle = element.createH1('form-title');
+    formHead.appendChild(formTitle);
+
     const titleInput = element.createInput('text', 'title');
     const closeButton = element.createButton('btn-close-form');
     const submitButton = element.createButton('btn-submit-form');
@@ -36,7 +39,7 @@ const createProjectForm = () => {
     closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Submit';
 
-    form.append(formTitle, titleInput, closeButton, submitButton);
+    form.append(titleInput, closeButton, submitButton);
 
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -47,9 +50,11 @@ const createProjectForm = () => {
 }
 
 const createTaskForm = (projectIndex) => {
-    form.innerHTML = '';
+    formHead.innerHTML = '';
 
-    const formTitle = element.createPara('form-title');
+    const formTitle = element.createH1('form-title');
+    formHead.appendChild(formTitle);
+
     const titleInput = element.createInput('text', 'title');
     const dateInput = element.createInput('date', 'date');
     const prioInputL = element.createInput('radio', 'prio');
@@ -63,7 +68,7 @@ const createTaskForm = (projectIndex) => {
     closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Submit';
 
-    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
+    form.append(titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
 
     const radioInput = document.querySelectorAll('input[name="prio-input"]');
 
@@ -81,24 +86,12 @@ const createTaskForm = (projectIndex) => {
     })
 }
 
-const createTaskDetail = (projectIndex, taskIndex) => {
-    form.innerHTML = '';
- 
-    const taskTitle = element.createPara('detail-task-title');
-    const taskDue = element.createPara('detail-task-date');
-    const taskPrio = element.createPara('detail-task-prio');
-
-    taskTitle.textContent = projectsArray[projectIndex].projectTasks[taskIndex].name;
-    taskDue.textContent = projectsArray[projectIndex].projectTasks[taskIndex].date;
-    taskPrio.textContent = projectsArray[projectIndex].projectTasks[taskIndex].priority;
-
-    form.append(taskTitle, taskDue, taskPrio);
-}
-
 const createEditForm = (projectIndex, index) => {
-    form.innerHTML = '';
+    formHead.innerHTML = '';
 
-    const formTitle = element.createPara('form-title');
+    const formTitle = element.createH1('form-title');
+    formHead.appendChild(formTitle);
+
     const titleInput = element.createInput('text', 'title');
     const dateInput = element.createInput('date', 'date');
     const prioInputL = element.createInput('radio', 'prio');
@@ -112,7 +105,7 @@ const createEditForm = (projectIndex, index) => {
     closeButton.textContent = 'Cancel';
     submitButton.textContent = 'Edit';
 
-    form.append(formTitle, titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
+    form.append(titleInput, dateInput, prioInputL, prioInputH, closeButton, submitButton);
 
     titleInput.value = projectsArray[projectIndex].projectTasks[index].name;
     dateInput.value = projectsArray[projectIndex].projectTasks[index].date;
@@ -138,4 +131,4 @@ const createEditForm = (projectIndex, index) => {
     })
 }
 
-export {openModal, closeModal, createProjectForm, createTaskForm, createTaskDetail, createEditForm}
+export {openModal, closeModal, createProjectForm, createTaskForm, createEditForm}

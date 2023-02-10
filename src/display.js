@@ -1,6 +1,6 @@
 import { projectsArray, removeProject } from "./projects";
 import { openModal } from "./modal";
-import { createEditForm, createProjectForm, createTaskDetail, createTaskForm } from "./modal";
+import { createEditForm, createProjectForm, createTaskForm } from "./modal";
 import { removeTask } from "./tasks";
 import element from "./create-element";
 
@@ -17,7 +17,7 @@ const renderProjects = (projects) => {
     projectContainer.innerHTML = '';
 
     projects.forEach((project, projectIndex, tasks) => {
-        const projectCard = element.createDiv('project-card');
+        const projectCard = element.createLi('project-card');
         projectContainer.appendChild(projectCard);
 
         projectCard.addEventListener('click', () => {
@@ -65,26 +65,24 @@ const renderProjectTasks = (project, projectIndex) => {
         const taskCard = element.createDiv('task-card');
         taskContainer.appendChild(taskCard);
 
+        const cardLeft = element.createDiv('task-card-left');
+        const cardRight = element.createDiv('task-card-right');
+        taskCard.append(cardLeft, cardRight);
+
         const taskTitle = element.createPara('task-title');
         const taskDue = element.createPara('task-date');
         const taskPrio = element.createPara('task-prio');
-        const taskDetailBtn = element.createButton('btn-task-detail');
         const taskEditBtn = element.createButton('btn-task-edit');
         const taskRemoveBtn = element.createButton('btn-task-remove');
 
         taskTitle.textContent = task.name;
         taskDue.textContent = task.date;
         taskPrio.textContent = task.priority;
-        taskDetailBtn.textContent = 'Detail';
         taskEditBtn.textContent = 'Edit';
         taskRemoveBtn.textContent = 'X';
 
-        taskCard.append(taskTitle, taskDue, taskPrio, taskDetailBtn, taskEditBtn, taskRemoveBtn)
-
-        taskDetailBtn.addEventListener('click', () => {
-            openModal('task-detail');
-            createTaskDetail(projectIndex, index);
-        })
+        cardLeft.append(taskTitle, taskDue, taskPrio)
+        cardRight.append(taskEditBtn, taskRemoveBtn);
 
         taskEditBtn.addEventListener('click', () => {
             openModal('task-edit');
